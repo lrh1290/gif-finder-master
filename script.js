@@ -41,14 +41,10 @@ function updateGifs() {
         for (var j=0; j < limit; j++) {
             var imageURL_still = response.data[j].images.fixed_height_still.url;
             var imageURL_gif = response.data[j].images.fixed_height.url;
-            var imageRating = response.data[j].rating;
-            var imageTitle = response.data[j].title;
             var imageId = response.data[j].id;
             urls[j] = {
                 still: imageURL_still,
                 gif: imageURL_gif,
-                titled: imageTitle,
-                rating: imageRating,
                 id: imageId
             };
             var displayBox = $("<div class='col-md-3 col-sm-6 image-box'>")
@@ -56,7 +52,6 @@ function updateGifs() {
             ImageHolder.attr("id", j);
             ImageHolder.attr("src", imageURL_still);
             displayBox.append(ImageHolder);
-            displayBox.append("<div>" + imageTitle + "</div><div>Rating: " + imageRating + "</div>");
             var favsBtn = $("<button title='Save to favorites' class='btn btn-danger btn-sm save' id='btn" + j + "'>");
             favsBtn.val(j);
             favsBtn.html("<i class='fas fa-heart'></i>");
@@ -107,8 +102,6 @@ function save() {
     var addToFavs = {
         still: urls[id].still,
         gif: urls[id].gif,
-        titled: urls[id].titled,
-        rating: urls[id].rating,
         id: urls[id].imageId
     }
     favorites.push(addToFavs);
@@ -122,15 +115,11 @@ function loadFavorites() {
     for (var k=0; k < favorites.length; k++) {
         var imageURL_still = favorites[k].still;
         var imageURL_gif = favorites[k].gif;
-        var imageTitle = favorites[k].titled;
-        var imageRating = favorites[k].rating;
         var imageId = favorites[k].id;
         
         urls[k] = {
             still: imageURL_still,
             gif: imageURL_gif,
-            titled: imageTitle,
-            rating: imageRating,
             id: imageId
         };
         
@@ -139,7 +128,6 @@ function loadFavorites() {
         ImageHolder.attr("id", k);
         ImageHolder.attr("src", imageURL_still);
         displayBox.append(ImageHolder);
-        displayBox.append("<div>" + imageTitle + "</div><div>Rating: " + imageRating + "</div>");
         
         var downloadBtn = $("<a class='btn btn-info btn-sm' href='https://i.giphy.com/media/" + imageId + "/giphy.gif' download target='_blank'><button class='btn btn-info btn-sm></button></a>");
         downloadBtn.val(k);
