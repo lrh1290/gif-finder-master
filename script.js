@@ -19,7 +19,7 @@ function renderHeader() {
     if (favorites.length !== 0) {
         var btnFavs = $("<button id='favorites'>");
         btnFavs.addClass("btn btn-danger");
-        btnFavs.text("favorites");
+        btnFavs.text("FAVORITES");
         $("#header").append(btnFavs);
     };
 };
@@ -66,7 +66,6 @@ function updateGifs() {
     });
 };
 
-// When click "add," make button for it
 $("#add-movie").on("click", function(event) {
     event.preventDefault();
     var inputText = $("#movie-input").val();
@@ -83,8 +82,6 @@ $("#add-movie").on("click", function(event) {
     renderHeader();
 });
 
-
-// When click an image animate/deanimate it
 function animate() {
     var currentImage = $(this);
     var currentImageId = currentImage.attr("id");
@@ -96,7 +93,6 @@ function animate() {
 };
 $(document).on("click", ".image", animate);
 
-// Save to favorites
 function save() {
     var id = $(this).val();
     var addToFavs = {
@@ -109,7 +105,6 @@ function save() {
 }
 $(document).on("click", ".save", save);
 
-// Render the favorites screen
 function loadFavorites() {
     $("#gif-holder").empty();
     for (var k=0; k < favorites.length; k++) {
@@ -139,8 +134,6 @@ function loadFavorites() {
 };
 
 $(document).on("click", "#favorites", loadFavorites);
-
-// When click a button, fetch gifs
 $(document).on("click", ".movie", updateGifs);
 
 renderHeader();
